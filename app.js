@@ -11,7 +11,7 @@ var express = require('express')
   , flash = require('connect-flash')
   , sock= require('./models/socket')
   , fs = require('fs') ;
-
+var cluster = require('cluster');
 var app = express();
 
 //全局日志配置
@@ -69,10 +69,10 @@ if ('development' == app.get('env')) {
 var server = http.createServer(app);
 var io = require('socket.io').listen(server,{ log: false });//{ log: false }关掉终端debug
 sock(io);//执行socket.js里面的内容
-
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
 
 routes(app);
 

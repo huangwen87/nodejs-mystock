@@ -1,5 +1,5 @@
-var mongodb = require('./models/db');
-var connect=require('./models/connect');
+var mongodb = require('./../models/db');
+var connect=require('./../models/connect');
 
 setTimeout(function () {
 	global.db.collection('user',function(err,collection){

@@ -10,9 +10,11 @@ var crypto = require('crypto'), //密码加密模块
     talk = require('./talk'),
     stockroom = require('./stockroom'),
     test = require('./test'),
-    async = require('async');
+    async = require('async'),
+    cluster = require('cluster');
 
 module.exports = function(app){
+
   app.get('/',function(req,res){
     if(req.session.user){
       //原始方式
