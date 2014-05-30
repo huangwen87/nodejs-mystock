@@ -75,7 +75,7 @@
               <div id="showTalkCom">
                 <p class="lookTalkMessage" ng-click="lookTalkMessage()">查看更早内容</p>
               </div>
-              <textarea style="width:100%;height:55px;margin-bottom:10px;margin-top:10px;" id="talkText"></textarea>
+              <textarea style="width:100%;height:55px;margin-bottom:10px;margin-top:10px;resize: vertical;" id="talkText"></textarea>
               <button type="button" class="btn btn-primary navbar-right" ng-click="talkSubmit()">发布</button>
             </div>
           </div>
@@ -83,8 +83,8 @@
       </div>
 
       <h3>发布评论</h3>
-      <textarea style="width:100%;height:80px;margin-bottom:10px;" ng-model="sayCom" >({{stock.symbol}})${{stock.name}}$ :</textarea>
-      <button type="button" class="btn btn-primary navbar-right" ng-click="submitCom()">发布</button>
+      <textarea style="width:100%;height:80px;margin-bottom:10px;resize: vertical;" ng-model="sayCom" >({{stock.symbol}})${{stock.name}}$ :</textarea>
+      <button type="button" id="submitBTN" class="btn btn-primary navbar-right" ng-click="submitCom()">发布</button>
       <div class="clearfix"></div>
       <ul class="nav nav-tabs" id="myTab">
         <li class="active"><a href="#home" data-toggle="tab">相关</a></li>
