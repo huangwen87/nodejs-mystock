@@ -13,7 +13,7 @@ var topic={};
 
 //缓存
 var redis = require("redis"),
-    client = redis.createClient();
+    client = redis.createClient(redisCache.port, redisCache.host);
 
 client.on("error", function(error) {
     console.log(error);
