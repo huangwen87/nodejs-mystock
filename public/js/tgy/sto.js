@@ -277,16 +277,21 @@ function FetchCtrl($scope, $http, $templateCache) {
   */
   //提交话题
   $scope.submitCom=function(){
-    var commentObj=stock.textExtract($scope.sayCom,myName);
-    $http.post("/submitTopic", commentObj).
-      success(function(data,status){
-        if(data.isOk){
-          $scope.sayCom=sayComText;
-        }else{
-          alert("提交失败!");
-        }
-      });
+    if($("#headShowName").text() == null || $("#headShowName").text() == ""){
+        alert("您没有登陆，请登录后在发表评论，谢谢！");
+    }else{
+        var commentObj=stock.textExtract($scope.sayCom,myName);
+        $http.post("/submitTopic", commentObj).
+          success(function(data,status){
+            if(data.isOk){
+              $scope.sayCom=sayComText;
+            }else{
+              alert("提交失败!");
+            }
+          });
+    }
   };
+
 
 
   //下面是延迟执行的内容
