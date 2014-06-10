@@ -14,17 +14,8 @@ var express = require('express')
 var cluster = require('cluster');
 var app = express();
 
-//全局日志配置
-var accessLogfile = fs.createWriteStream('access.log', {flags: 'a'});
-var errorLogfile = fs.createWriteStream('error.log', {flags: 'a'});
-app.use(express.logger({stream: accessLogfile}));
-app.configure('production', function(){
-    app.error(function (err, req, res, next){
-        var meta = '[' + new Date() + ']' + req.url + '\n';
-        errorLogfile.write(meta + err.stack + '\n');
-        next();
-    });
-});
+//开发or生产环境配置
+app.set('env', 'production');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -63,6 +54,18 @@ app.use(app.router);
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
+}
+
+//production环境 全局日志配置
+var accessLogfile = fs.createWriteStream('access.log', {flags: 'a'});
+var errorLogfile = fs.createWriteStream('error.log', {flags: 'a'});
+app.use(express.logger({stream: accessLogfile}));
+if ('production' == app.get('env')) {
+    app.use(function (err, req, res, next){
+        var meta = '[' + new Date() + ']' + req.url + '\n';
+        errorLogfile.write(meta + err.stack + '\n');
+        next();
+    });
 }
 
 //socket 通信
